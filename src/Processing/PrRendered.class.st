@@ -1,5 +1,5 @@
 Class {
 	#name : #PrRendered,
 	#superclass : #Announcement,
-	#category : #'Processing-Processing'
+	#category : #'Processing-Announcements'
 }

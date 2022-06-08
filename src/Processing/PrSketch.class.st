@@ -11,7 +11,7 @@ Class {
 		'announcer',
 		'frameNumber'
 	],
-	#category : #Processing
+	#category : #'Processing-Core'
 }
 
 { #category : #'instance creation' }

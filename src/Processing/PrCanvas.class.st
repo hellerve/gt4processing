@@ -7,7 +7,7 @@ Class {
 		'canvas',
 		'strokeWeight'
 	],
-	#category : #Processing
+	#category : #'Processing-Core'
 }
 
 { #category : #accessing }
