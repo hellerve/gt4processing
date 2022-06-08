@@ -17,5 +17,5 @@ WhisperingDrink class >> play [
 				timesRepeat: [ | x y |
 					x := (10 to: 490) atRandom.
 					y := (10 to: 490) atRandom.
-					aCanvas line: x @ y to: x @ x ] ]) frameRate: 1
+					aCanvas lineFrom: x @ y to: x @ x ] ]) frameRate: 1
 ]

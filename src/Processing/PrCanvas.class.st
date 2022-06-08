@@ -63,7 +63,7 @@ PrCanvas >> initialize [
 ]
 
 { #category : #accessing }
-PrCanvas >> line: aPoint to: anotherPoint [
+PrCanvas >> lineFrom: aPoint to: anotherPoint [
 	canvas stroke
 		path: (canvas shape line: aPoint to: anotherPoint);
 		paint: color;
@@ -72,7 +72,7 @@ PrCanvas >> line: aPoint to: anotherPoint [
 ]
 
 { #category : #accessing }
-PrCanvas >> rectangle: aPoint to: anotherPoint [
+PrCanvas >> rectangle: aPoint withSize: anotherPoint [
 	| path |
 	path := SpartaRectangle origin: aPoint extent: anotherPoint.
 
