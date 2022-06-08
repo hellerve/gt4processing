@@ -24,20 +24,13 @@ PrCanvas >> canvas [
 ]
 
 { #category : #accessing }
-PrCanvas >> circle: aPoint withRadius: anInteger [
+PrCanvas >> circleAt: aPoint withRadius: anInteger [
 	| path |
 	path := canvas shape circleAt: aPoint radius: anInteger.
 
-	canvas fill
-		paint: fill;
-		path: path;
-		draw.
-
-	canvas stroke
-		paint: color;
-		path: path;
-		width: strokeWeight;
-		draw
+	self
+		fillPath: path;
+		drawPath: path
 ]
 
 { #category : #accessing }
@@ -46,8 +39,36 @@ PrCanvas >> color: aColor [
 ]
 
 { #category : #accessing }
+PrCanvas >> drawPath: aPath [
+	canvas stroke
+		paint: color;
+		path: aPath;
+		width: strokeWeight;
+		draw
+]
+
+{ #category : #accessing }
+PrCanvas >> ellipseAt: aPoint withSize: anotherPoint [
+	| path |
+	path := SpartaEllipse origin: aPoint extent: anotherPoint.
+
+	self
+		fillPath: path;
+		drawPath: path
+]
+
+{ #category : #accessing }
 PrCanvas >> fill: aColor [
 	fill := aColor
+]
+
+{ #category : #accessing }
+PrCanvas >> fillPath: aPath [
+	canvas fill
+		paint: fill;
+		alpha: fill alpha;
+		path: aPath;
+		draw
 ]
 
 { #category : #accessing }
@@ -72,25 +93,54 @@ PrCanvas >> lineFrom: aPoint to: anotherPoint [
 ]
 
 { #category : #accessing }
-PrCanvas >> rectangle: aPoint withSize: anotherPoint [
+PrCanvas >> path [
+	^ canvas path
+]
+
+{ #category : #accessing }
+PrCanvas >> pointAt: aPoint [
+	self drawPath: (canvas shape line: aPoint to: aPoint)
+]
+
+{ #category : #accessing }
+PrCanvas >> quadBottomLeft: bottomLeftPoint topLeft: topLeftPoint topRight: topRightPoint bottomRight: bottomRightPoint [
+	| path |
+	path := self path
+			moveTo: bottomLeftPoint;
+			lineTo: topLeftPoint;
+			lineTo: topRightPoint;
+			lineTo: bottomRightPoint;
+			close;
+			finish.
+
+	self
+		fillPath: path;
+		drawPath: path
+]
+
+{ #category : #accessing }
+PrCanvas >> rectangleAt: aPoint withSize: anotherPoint [
 	| path |
 	path := SpartaRectangle origin: aPoint extent: anotherPoint.
 
-	canvas fill
-		paint: fill;
-		path: path;
-		draw.
-
-	canvas stroke
-		paint: color;
-		path: path;
-		width: strokeWeight;
-		draw
+	self
+		fillPath: path;
+		drawPath: path
 ]
 
 { #category : #accessing }
 PrCanvas >> size: aPoint [
 	canvas := SkiaCanvas extent: aPoint
+]
+
+{ #category : #accessing }
+PrCanvas >> squareAt: aPoint withSize: aNumber [
+	| path |
+	path := SpartaRectangle origin: aPoint extent: aNumber @ aNumber.
+
+	self
+		fillPath: path;
+		drawPath: path
 ]
 
 { #category : #accessing }
