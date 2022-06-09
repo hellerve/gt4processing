@@ -11,6 +11,19 @@ Class {
 }
 
 { #category : #accessing }
+PrCanvas >> arcFrom: aPoint to: anotherPoint withAngle: aNumber [
+	| path |
+	path := self path
+			moveTo: aPoint;
+			cwArcTo: anotherPoint angle: aNumber;
+			finish.
+
+	self
+		fillPath: path;
+		drawPath: path
+]
+
+{ #category : #accessing }
 PrCanvas >> background: aColor [
 	canvas fill
 		path: canvas bounds;
@@ -44,6 +57,7 @@ PrCanvas >> drawPath: aPath [
 		paint: color;
 		path: aPath;
 		width: strokeWeight;
+		alpha: color alpha;
 		draw
 ]
 
@@ -66,8 +80,8 @@ PrCanvas >> fill: aColor [
 PrCanvas >> fillPath: aPath [
 	canvas fill
 		paint: fill;
-		alpha: fill alpha;
 		path: aPath;
+		alpha: fill alpha;
 		draw
 ]
 
@@ -90,6 +104,16 @@ PrCanvas >> lineFrom: aPoint to: anotherPoint [
 		paint: color;
 		width: strokeWeight;
 		draw.
+]
+
+{ #category : #accessing }
+PrCanvas >> noFill [
+	fill := Color transparent
+]
+
+{ #category : #accessing }
+PrCanvas >> noStroke [
+	color := Color transparent
 ]
 
 { #category : #accessing }
