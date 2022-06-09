@@ -2,6 +2,17 @@
 
 is a simple clone of Processing for GT. It’s also a work in progress.
 
+## Installation
+
+The repository contains a Metacello baseline, such that you should be able to execute the following to get the code:
+
+```smalltalk
+Metacello new
+	baseline: 'Processing';
+	repository: 'github://hellerve/gt4processing:main/src';
+	load.
+```
+
 ## Usage
 
 ```smalltalk
