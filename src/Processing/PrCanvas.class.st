@@ -87,7 +87,11 @@ PrCanvas >> fillPath: aPath [
 
 { #category : #accessing }
 PrCanvas >> gtLiveFor: aView [
-	^ canvas gtLiveFor: aView
+	<gtView>
+	| prCanvas |
+	^ aView explicit
+		title: 'Live';
+		stencil: [ canvas asForm asElement ]
 ]
 
 { #category : #accessing }
