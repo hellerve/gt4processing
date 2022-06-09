@@ -25,7 +25,7 @@ is a simple clone of Processing for GT. It’s also a work in progress.
 
 ## Demo
 
-https://user-images.githubusercontent.com/7725188/172895990-60fd1293-6778-4c54-bc26-10c880e4ab92.mov
+https://user-images.githubusercontent.com/7725188/172896827-99023dd0-c395-4b2a-8d0a-5f90f0f8c366.mov
 
 <hr/>
 
