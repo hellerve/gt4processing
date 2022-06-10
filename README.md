@@ -36,7 +36,7 @@ Metacello new
 
 ## Demo
 
-https://user-images.githubusercontent.com/7725188/172896827-99023dd0-c395-4b2a-8d0a-5f90f0f8c366.mov
+https://user-images.githubusercontent.com/7725188/173018892-7ec58b7f-d62c-4ea3-8e26-167696a1c493.mov
 
 <hr/>
 
