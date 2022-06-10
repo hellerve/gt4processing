@@ -24,12 +24,12 @@ Metacello new
 	run: [ :aCanvas :frameNumber | 
 		aCanvas
 			fill: Color blue;
-			color: Color green;
+			stroke: Color green;
 			rectangleAt: 10 @ 10 withSize: 100 @ 100;
-			color: Color red;
+			stroke: Color red;
 			lineFrom: 110 @ 110 to: 300 @ 300;
 			fill: Color orange;
-			color: Color white;
+			stroke: Color white;
 			circleAt: 350 @ 350 withRadius: 100 ])
 	frameRate: 0
 ```

@@ -12,7 +12,7 @@ WhisperingDrink class >> play [
 		run: [ :aCanvas :frameNumber | 
 			aCanvas
 				background: Color black;
-				color: Color veryVeryLightGray.
+				stroke: Color veryVeryLightGray.
 			300
 				timesRepeat: [ | x y |
 					x := (10 to: 490) atRandom.

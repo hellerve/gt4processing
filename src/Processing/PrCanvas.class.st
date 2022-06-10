@@ -47,11 +47,6 @@ PrCanvas >> circleAt: aPoint withRadius: anInteger [
 ]
 
 { #category : #accessing }
-PrCanvas >> color: aColor [
-	color := aColor
-]
-
-{ #category : #accessing }
 PrCanvas >> drawPath: aPath [
 	canvas stroke
 		paint: color;
@@ -69,6 +64,11 @@ PrCanvas >> ellipseAt: aPoint withSize: anotherPoint [
 	self
 		fillPath: path;
 		drawPath: path
+]
+
+{ #category : #accessing }
+PrCanvas >> fill [
+	^ fill
 ]
 
 { #category : #accessing }
@@ -169,6 +169,16 @@ PrCanvas >> squareAt: aPoint withSize: aNumber [
 	self
 		fillPath: path;
 		drawPath: path
+]
+
+{ #category : #accessing }
+PrCanvas >> stroke [
+	^ color
+]
+
+{ #category : #accessing }
+PrCanvas >> stroke: aColor [
+	color := aColor
 ]
 
 { #category : #accessing }

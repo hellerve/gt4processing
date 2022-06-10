@@ -9,7 +9,7 @@ Factories class >> circleOn: aCanvas [
 	| a x1 y1 vx vy length x3 y3 dir x2 y2 x y |
 	aCanvas
 		noFill;
-		color: Color black;
+		stroke: Color black;
 		strokeWeight: 0.1.
 
 	2000
