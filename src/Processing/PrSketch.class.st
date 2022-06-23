@@ -47,11 +47,44 @@ PrSketch >> frameRate: aNumber [
 
 { #category : #accessing }
 PrSketch >> gtLiveFor: aView [
-	| prCanvas |
+	| prCanvas form |
 	prCanvas := self create.
 	^ aView explicit
 		title: 'Live';
-		stencil: [  prCanvas canvas asForm asElement ];
+		stencil: [ (form := prCanvas canvas asForm) asElement ];
+		actionDropdownButtonIcon: BrGlamorousVectorIcons folder
+			tooltip: 'Save as file'
+			content: [ | content selector fileEditor |
+				content := BrVerticalPane new fitContent
+						margin: (BlInsets all: 5);
+						width: 400;
+						addAptitude: BrGlamorousWithHorizontalResizerAptitude
+								+ BrGlamorousWithVerticalResizerAptitude.
+				content
+					addChild: (selector := BrFileSelector new
+								margin: (BlInsets bottom: 5);
+								buttonLabel: 'Select directory';
+								fileFilterBlock: [ :_ | false ]).
+				content
+					addChild: (BrHorizontalPane new fitContent
+							addChild: (BrLabel new
+									aptitude: BrGlamorousLabelAptitude new;
+									text: 'File Name: ';
+									constraintsDo: [ :c | c grid vertical alignCenter ]);
+							addChild: (fileEditor := BrEditableLabel new
+										aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
+										text: '';
+										height: 23;
+										margin: (BlInsets left: 10 right: 10);
+										width: 100;
+										constraintsDo: [ :c | c grid vertical alignCenter ];
+										switchToEditor);
+							addChild: (BrButton new
+									aptitude: BrGlamorousButtonWithIconAptitude;
+									icon: BrGlamorousVectorIcons accept;
+									action: [ :aButton | 
+										form writeBMPfileNamed: (selector folder / fileEditor text asString) pathString.
+										aButton fireEvent: BrDropdownHideWish new ])) ];
 		updateWhen: PrRendered in: self announcer
 ]
 
