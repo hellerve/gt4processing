@@ -54,17 +54,19 @@ PrSketch >> gtLiveFor: aView [
 		stencil: [ (form := prCanvas canvas asForm) asElement ];
 		actionDropdownButtonIcon: BrGlamorousVectorIcons folder
 			tooltip: 'Save as file'
-			content: [ | content selector fileEditor |
-				content := BrVerticalPane new fitContent
+			content: [ | content folderSelector fileEditor |
+				content := BrVerticalPane new
 						margin: (BlInsets all: 5);
 						width: 400;
+						height: 400;
 						addAptitude: BrGlamorousWithHorizontalResizerAptitude
 								+ BrGlamorousWithVerticalResizerAptitude.
 				content
-					addChild: (selector := BrFileSelector new
+					addChild: (folderSelector := BrFileSelector new
 								margin: (BlInsets bottom: 5);
 								buttonLabel: 'Select directory';
-								fileFilterBlock: [ :_ | false ]).
+								fileFilterBlock: [ :_ | false ];
+								folder: FileLocator home).
 				content
 					addChild: (BrHorizontalPane new fitContent
 							addChild: (BrLabel new
@@ -73,7 +75,7 @@ PrSketch >> gtLiveFor: aView [
 									constraintsDo: [ :c | c grid vertical alignCenter ]);
 							addChild: (fileEditor := BrEditableLabel new
 										aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
-										text: '';
+										text: 'export.png';
 										height: 23;
 										margin: (BlInsets left: 10 right: 10);
 										width: 100;
@@ -83,7 +85,17 @@ PrSketch >> gtLiveFor: aView [
 									aptitude: BrGlamorousButtonWithIconAptitude;
 									icon: BrGlamorousVectorIcons accept;
 									action: [ :aButton | 
-										form writeBMPfileNamed: (selector folder / fileEditor text asString) pathString.
+										| path selector |
+										path := fileEditor text asString asPath.
+										selector := {'png' -> #writePNGFileNamed:.
+												'bmp' -> #writeBMPfileNamed:.
+												'jpeg' -> #writeJPEGfileNamed:.
+												'jpg' -> #writeJPEGfileNamed:} asDictionary
+												at: path extension asLowercase
+												ifAbsent: [ self error: 'No exporter found. We can only export JPG, PNG, or BMP files.' ].
+										form
+											perform: selector
+											withArguments: {(folderSelector folder / fileEditor text asString) pathString}.
 										aButton fireEvent: BrDropdownHideWish new ])) ];
 		updateWhen: PrRendered in: self announcer
 ]
