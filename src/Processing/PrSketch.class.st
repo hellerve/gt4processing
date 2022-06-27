@@ -52,6 +52,7 @@ PrSketch >> gtLiveFor: aView [
 	^ aView explicit
 		title: 'Live';
 		stencil: [ (form := prCanvas canvas asForm) asElement ];
+		actionButtonIcon: BrGlamorousVectorIcons shutdown action: [ self stop ];
 		actionDropdownButtonIcon: BrGlamorousVectorIcons folder
 			tooltip: 'Save as file'
 			content: [ | content folderSelector fileEditor |
@@ -139,4 +140,9 @@ PrSketch >> setupCanvas: aCanvas [
 { #category : #accessing }
 PrSketch >> size: aPoint [
 	size := aPoint
+]
+
+{ #category : #accessing }
+PrSketch >> stop [
+	frameRate := 0
 ]
